@@ -212,14 +212,14 @@ module Bundler
 
     def mkdir_p(path)
       if requires_sudo?
-        sudo "mkdir -p '#{path}'" unless File.exist?(path)
+        sudo("mkdir", "-p", "'#{path}'") unless File.exist?(path)
       else
         FileUtils.mkdir_p(path)
       end
     end
 
-    def sudo(str)
-      `sudo -p 'Enter your password to install the bundled RubyGems to your system: ' #{str}`
+    def sudo(*cmd)
+      Kernel.system("sudo", "-p", "'Enter your password to install the bundled RubyGems to your system: '", *cmd)
     end
 
     def read_file(file)

@@ -75,7 +75,7 @@ module Spec
     end
 
     def sys_exec(cmd, expect_err = false)
-      Open3.popen3(cmd.to_s) do |stdin, stdout, stderr|
+      Open3.popen3(cmd) do |stdin, stdout, stderr|
         @in_p, @out_p, @err_p = stdin, stdout, stderr
 
         yield @in_p if block_given?

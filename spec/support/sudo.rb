@@ -9,9 +9,9 @@ module Spec
       present? && ENV['BUNDLER_SUDO_TESTS']
     end
 
-    def sudo(cmd)
+    def sudo(*cmd)
       raise "sudo not present" unless Sudo.present?
-      sys_exec("sudo #{cmd}")
+      sys_exec(["sudo", *cmd])
     end
 
     def chown_system_gems_to_root

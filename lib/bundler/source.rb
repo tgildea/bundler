@@ -103,20 +103,20 @@ module Bundler
 
         # SUDO HAX
         if Bundler.requires_sudo?
-          sudo "mkdir -p #{Bundler.rubygems.gem_dir}/gems #{Bundler.rubygems.gem_dir}/specifications"
-          sudo "cp -R #{Bundler.tmp}/gems/#{spec.full_name} #{Bundler.rubygems.gem_dir}/gems/"
-          sudo "cp -R #{Bundler.tmp}/specifications/#{spec.full_name}.gemspec #{Bundler.rubygems.gem_dir}/specifications/"
+          sudo "mkdir", "-p", "#{Bundler.rubygems.gem_dir}/gems", "#{Bundler.rubygems.gem_dir}/specifications"
+          sudo "cp", "-R", "#{Bundler.tmp}/gems/#{spec.full_name}", "#{Bundler.rubygems.gem_dir}/gems/"
+          sudo "cp", "-R", "#{Bundler.tmp}/specifications/#{spec.full_name}.gemspec", "#{Bundler.rubygems.gem_dir}/specifications/"
           spec.executables.each do |exe|
-            sudo "mkdir -p #{Bundler.rubygems.gem_bindir}"
-            sudo "cp -R #{Bundler.tmp}/bin/#{exe} #{Bundler.rubygems.gem_bindir}"
+            sudo "mkdir", "-p", "#{Bundler.rubygems.gem_bindir}"
+            sudo "cp", "-R", "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_bindir}"
           end
         end
 
         spec.loaded_from = "#{Bundler.rubygems.gem_dir}/specifications/#{spec.full_name}.gemspec"
       end
 
-      def sudo(str)
-        Bundler.sudo(str)
+      def sudo(*args)
+        Bundler.sudo(*args)
       end
 
       def cache(spec)
@@ -272,8 +272,8 @@ module Bundler
         Bundler.rubygems.download_gem(spec, uri, download_path)
 
         if Bundler.requires_sudo?
-          sudo "mkdir -p #{Bundler.rubygems.gem_dir}/cache"
-          sudo "mv #{Bundler.tmp}/cache/#{spec.full_name}.gem #{gem_path}"
+          sudo "mkdir", "-p", "#{Bundler.rubygems.gem_dir}/cache"
+          sudo "mv", "#{Bundler.tmp}/cache/#{spec.full_name}.gem", "#{gem_path}"
         end
 
         gem_path
@@ -405,7 +405,7 @@ module Bundler
           if Bundler.requires_sudo?
             Bundler.mkdir_p "#{Bundler.rubygems.gem_dir}/bin"
             spec.executables.each do |exe|
-              Bundler.sudo "cp -R #{Bundler.tmp}/bin/#{exe} #{Bundler.rubygems.gem_dir}/bin/"
+              Bundler.sudo "cp", "-R" "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_dir}/bin/"
             end
           end
         end
