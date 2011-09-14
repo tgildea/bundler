@@ -36,7 +36,7 @@ begin
 
     task :clean_sudo do
       puts "Cleaning up sudo test files..."
-      system "sudo rm -rf #{File.expand_path('../tmp/sudo_gem_home', __FILE__)}"
+      system "sudo", "rm", "-rf", File.expand_path('../tmp/sudo_gem_home', __FILE__)
     end
 
     namespace :rubygems do

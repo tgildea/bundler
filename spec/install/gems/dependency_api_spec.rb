@@ -248,8 +248,8 @@ describe "gemcutter's dependency API" do
   end
 
   it "should install when EndpointSpecification with a bin dir owned by root", :sudo => true do
-    sys_exec "mkdir -p #{system_gem_path("bin")}"
-    sudo "chown -R root #{system_gem_path("bin")}"
+    sys_exec "mkdir", "-p", system_gem_path("bin")
+    sudo "chown", "-R", "root", system_gem_path("bin")
 
     gemfile <<-G
         source "#{source_uri}"

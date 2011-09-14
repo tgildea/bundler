@@ -7,7 +7,7 @@ module Spec
         unless ENV['BUNDLER_SUDO_TESTS']
           FileUtils.rm_rf(dir)
         else
-          `sudo rm -rf #{dir}`
+          Kernel.system "sudo", "rm", "-rf", dir
         end
       end
       FileUtils.mkdir_p(tmp)
@@ -83,7 +83,7 @@ module Spec
     end
 
     def sys_exec(cmd, expect_err = false)
-      Open3.popen3(cmd.to_s) do |stdin, stdout, stderr|
+      Open3.popen3(cmd) do |stdin, stdout, stderr|
         @in_p, @out_p, @err_p = stdin, stdout, stderr
 
         yield @in_p if block_given?

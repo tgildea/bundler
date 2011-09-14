@@ -21,7 +21,7 @@ describe "when using sudo", :sudo => true do
     it "installs when BUNDLE_PATH is owned by root" do
       bundle_path = tmp("owned_by_root")
       FileUtils.mkdir_p bundle_path
-      sudo "chown -R root #{bundle_path}"
+      sudo "chown", "-R", "root", bundle_path
 
       ENV['BUNDLE_PATH'] = bundle_path.to_s
       install_gemfile <<-G
@@ -39,7 +39,7 @@ describe "when using sudo", :sudo => true do
 
   describe "and BUNDLE_PATH is not writable" do
     it "installs" do
-      sudo "chmod ugo-w #{default_bundle_path}"
+      sudo "chmod", "ugo-w", default_bundle_path
       install_gemfile <<-G
         source "file://#{gem_repo1}"
         gem "rack", '1.0'
@@ -55,8 +55,8 @@ describe "when using sudo", :sudo => true do
       begin
         gem_home = tmp('sudo_gem_home')
 
-        sudo "mkdir -p #{gem_home}"
-        sudo "chmod ugo-w #{gem_home}"
+        sudo "mkdir", "-p", gem_home
+        sudo "chmod", "ugo-w", gem_home
         ENV['GEM_HOME'] = gem_home.to_s
         ENV['GEM_PATH'] = nil
 

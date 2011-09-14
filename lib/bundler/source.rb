@@ -98,12 +98,12 @@ module Bundler
 
         # SUDO HAX
         if Bundler.requires_sudo?
-          Bundler.sudo "mkdir -p #{Bundler.rubygems.gem_dir}/gems #{Bundler.rubygems.gem_dir}/specifications"
-          Bundler.sudo "cp -R #{Bundler.tmp}/gems/#{spec.full_name} #{Bundler.rubygems.gem_dir}/gems/"
-          Bundler.sudo "cp -R #{Bundler.tmp}/specifications/#{spec.full_name}.gemspec #{Bundler.rubygems.gem_dir}/specifications/"
+          Bundler.sudo "mkdir", "-p", "#{Bundler.rubygems.gem_dir}/gems", "#{Bundler.rubygems.gem_dir}/specifications"
+          Bundler.sudo "cp", "-R", "#{Bundler.tmp}/gems/#{spec.full_name}", "#{Bundler.rubygems.gem_dir}/gems/"
+          Bundler.sudo "cp", "-R", "#{Bundler.tmp}/specifications/#{spec.full_name}.gemspec", "#{Bundler.rubygems.gem_dir}/specifications/"
           spec.executables.each do |exe|
-            Bundler.sudo "mkdir -p #{Bundler.rubygems.gem_bindir}"
-            Bundler.sudo "cp -R #{Bundler.tmp}/bin/#{exe} #{Bundler.rubygems.gem_bindir}"
+            Bundler.sudo "mkdir", "-p", "#{Bundler.rubygems.gem_bindir}"
+            Bundler.sudo "cp", "-R", "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_bindir}"
           end
         end
 
@@ -381,7 +381,7 @@ module Bundler
           if Bundler.requires_sudo?
             Bundler.mkdir_p "#{Bundler.rubygems.gem_dir}/bin"
             spec.executables.each do |exe|
-              Bundler.sudo "cp -R #{Bundler.tmp}/bin/#{exe} #{Bundler.rubygems.gem_dir}/bin/"
+              Bundler.sudo "cp", "-R" "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_dir}/bin/"
             end
           end
         end
