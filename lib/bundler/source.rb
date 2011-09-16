@@ -405,7 +405,7 @@ module Bundler
           if Bundler.requires_sudo?
             Bundler.mkdir_p "#{Bundler.rubygems.gem_dir}/bin"
             spec.executables.each do |exe|
-              Bundler.sudo "cp", "-R" "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_dir}/bin/"
+              Bundler.sudo "cp", "-R", "#{Bundler.tmp}/bin/#{exe}", "#{Bundler.rubygems.gem_dir}/bin/"
             end
           end
         end
